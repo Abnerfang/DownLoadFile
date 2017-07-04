@@ -11,6 +11,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Main {
+  private static final String SAVEPATH = "C:\\Users\\cao.zm\\Desktop\\URL.txt";
+  private static final String DOWNLOADFILE = "D:\\FontTTF";
+
   private static byte[] readInputStream(InputStream inputStream) throws IOException {
     byte[] buffer = new byte[1024];
     int len;
@@ -62,7 +65,7 @@ public class Main {
     try {
       String str;
       String url[] = new String[201];
-      fis = new FileInputStream("C:\\Users\\cao.zm\\Desktop\\URL.txt");// FileInputStream
+      fis = new FileInputStream(SAVEPATH);// FileInputStream
       // 从文件系统中的某个文件中获取字节
       isr = new InputStreamReader(fis);// InputStreamReader 是字节流通向字符流的桥梁,
       br = new BufferedReader(isr);// 从字符输入流中读取文件中的内容,封装了一个new InputStreamReader的对象
@@ -73,7 +76,7 @@ public class Main {
       }
       for (String a : url) {
         String[] name = a.split("/");
-        downLoadFromUrl(a, name[name.length - 1], "D:\\FontTTF");
+        downLoadFromUrl(a, name[name.length - 1], DOWNLOADFILE);
       }
 
     } catch (FileNotFoundException e) {
