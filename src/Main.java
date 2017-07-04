@@ -11,9 +11,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Main {
-  public static byte[] readInputStream(InputStream inputStream) throws IOException {
+  private static byte[] readInputStream(InputStream inputStream) throws IOException {
     byte[] buffer = new byte[1024];
-    int len = 0;
+    int len;
     ByteArrayOutputStream bos = new ByteArrayOutputStream();
     while ((len = inputStream.read(buffer)) != -1) {
       bos.write(buffer, 0, len);
@@ -22,7 +22,7 @@ public class Main {
     return bos.toByteArray();
   }
 
-  public static void downLoadFromUrl(String urlStr, String fileName, String savePath) throws IOException {
+  private static void downLoadFromUrl(String urlStr, String fileName, String savePath) throws IOException {
     URL url = new URL(urlStr);
     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
     //设置超时间为3秒
@@ -60,7 +60,7 @@ public class Main {
     InputStreamReader isr = null;
     BufferedReader br = null; //用于包装InputStreamReader,提高处理性能。因为BufferedReader有缓冲的，而InputStreamReader没有。
     try {
-      String str = "";
+      String str;
       String url[] = new String[201];
       fis = new FileInputStream("C:\\Users\\cao.zm\\Desktop\\URL.txt");// FileInputStream
       // 从文件系统中的某个文件中获取字节
@@ -91,5 +91,4 @@ public class Main {
       }
     }
   }
-
 }
