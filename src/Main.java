@@ -11,8 +11,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Main {
-  private static final String SAVEPATH = "C:\\Users\\cao.zm\\Desktop\\URL.txt";
-  private static final String DOWNLOADFILE = "D:\\FontTTF";
+  private static final String SAVEPATH = "D:\\FontTTF";
+  private static final String DOWNLOADFILE = "C:\\Users\\cao.zm\\Desktop\\URL.txt";
 
   private static byte[] readInputStream(InputStream inputStream) throws IOException {
     byte[] buffer = new byte[1024];
@@ -63,22 +63,19 @@ public class Main {
     InputStreamReader isr = null;
     BufferedReader br = null; //用于包装InputStreamReader,提高处理性能。因为BufferedReader有缓冲的，而InputStreamReader没有。
     try {
-      String str;
-      String url[] = new String[201];
-      fis = new FileInputStream(SAVEPATH);// FileInputStream
+      String ttfUrl;
+      fis = new FileInputStream(DOWNLOADFILE);// FileInputStream
       // 从文件系统中的某个文件中获取字节
       isr = new InputStreamReader(fis);// InputStreamReader 是字节流通向字符流的桥梁,
       br = new BufferedReader(isr);// 从字符输入流中读取文件中的内容,封装了一个new InputStreamReader的对象
       int i = 0;
-      while ((str = br.readLine()) != null) {
-        url[i] = str;
+      while ((ttfUrl = br.readLine()) != null) {
+        String[] name = ttfUrl.split("/");
+        String file = name[name.length - 1];
         i++;
+        downLoadFromUrl(ttfUrl, file, SAVEPATH);
+        System.out.println(i);
       }
-      for (String a : url) {
-        String[] name = a.split("/");
-        downLoadFromUrl(a, name[name.length - 1], DOWNLOADFILE);
-      }
-
     } catch (FileNotFoundException e) {
       System.out.println("找不到指定文件");
     } catch (IOException e) {
